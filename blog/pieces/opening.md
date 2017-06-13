@@ -1,4 +1,4 @@
-Adding comments to a blob with Stitch
+Adding comments to a blog with Stitch
 -------------
 
 In this example, we'll start with a very simple blog page and add commenting functionality.

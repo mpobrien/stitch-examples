@@ -1,11 +1,12 @@
 
-Next we'll startup a single python webserver
+Next we'll startup a simple python webserver
 
      python -m SimpleHTTPServer
 
 Now browse to [the page](http://localhost:8000/blog.html)
 
 Ok, we have our basic page, time to add comments.
+
 Browse to your stitch application home page, on it you should see a script tag to load the stitch sdk and connect.
 Copy the first few lines that should look something like:
 
@@ -77,6 +78,9 @@ Not lets add the addComment function
          }
 
 Now lets try it out!
+
+Now we're using anonymous login for commenting, but you can connect to Google, Facebook, or any oath provider, very easily as well.
+You should now be able to add comments to your blog!
 
 The entire thing looks like:
 
