@@ -56,11 +56,8 @@ That function firsts logs the user into stitch anonymously, and then dislpays an
 Since `dislpayComments` doesn't exist, lets add it:
 
          function displayComments() {
-             db.collection('comments').find({}).then((docs) => {
-                 var html = "";
-                 docs.forEach((doc, index) => {
-                     html += "<div>" + JSON.stringify(doc) + "</div>";
-                 });
+             db.collection('comments').find({}).then(docs => {
+                 var html = docs.map(c => "<div>" + c.comment + "</div>").join("");
                  document.getElementById("comments").innerHTML = html;
              });
          }
@@ -121,11 +118,8 @@ The entire thing looks like:
               }
      
               function displayComments() {
-                  db.collection('comments').find({}).then((docs) => {
-                      var html = "";
-                      docs.forEach((doc, index) => {
-                          html += "<div>" + JSON.stringify(doc) + "</div>";
-                      });
+                  db.collection('comments').find({}).then(docs => {
+                      var html = docs.map(c => "<div>" + c.comment + "</div>").join("");
                       document.getElementById("comments").innerHTML = html;
                   });
               }
