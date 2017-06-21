@@ -30,10 +30,10 @@ Ok, we have our basic page, time to add comments.
 Browse to your stitch application home page, on it you should see a script tag to load the stitch sdk and connect.
 Copy the first few lines that should look something like:
 
-            <script src="https://s3.amazonaws.com/stitch-sdks/js/library/298a2b586d91d462099e5d9f66fba0a687837abe/stitch.min.js"></script>
-            <script>
-               const client = new stitch.StitchClient('eliot1-qffsf');
-               const db = client.service('mongodb', 'mongodb1').db('blog');
+        <script src="https://s3.amazonaws.com/stitch-sdks/js/library/stable/stitch.min.js"></script>
+        <script>
+         const client = new stitch.StitchClient('mdbw17s1-poiib');
+         const db = client.service('mongodb', 'mongodb-atlas').db('blog');
 
 For the `db` argument, change the name to `blog` from whatever was there before.
 
@@ -44,7 +44,7 @@ Next we are going to add an onLoad handler.
 So add a function in the script block:
 
          function displayCommentsOnLoad() {
-             client.anonymousAuth().then(displayComments)
+             client.login().then(displayComments)
          }
 
 Add make your body tag look like:
@@ -108,15 +108,15 @@ The entire thing looks like:
 
      <html>
          <head>
-             <script src="https://s3.amazonaws.com/stitch-sdks/js/library/298a2b586d91d462099e5d9f66fba0a687837abe/stitch.min.js"></script>
+             <script src="https://s3.amazonaws.com/stitch-sdks/js/library/stable/stitch.min.js"></script>
              <script>
-              const client = new stitch.StitchClient('eliot1-qffsf');
-              const db = client.service('mongodb', 'mongodb1').db('blog');
-     
+              const client = new stitch.StitchClient('mdbw17s1-poiib');
+              const db = client.service('mongodb', 'mongodb-atlas').db('blog');
+              
               function displayCommentsOnLoad() {
-                  client.anonymousAuth().then(displayComments);
+                  client.login().then(displayComments);
               }
-     
+              
               function displayComments() {
                   db.collection('comments').find({}).then(docs => {
                       var html = docs.map(c => "<div>" + c.comment + "</div>").join("");
@@ -129,7 +129,6 @@ The entire thing looks like:
                   db.collection("comments").insert({owner_id : client.authedId(), comment: foo.value}).then(displayComments);
                   foo.value = "";
               }
-              
              </script>
          </head>
          <body onLoad="displayCommentsOnLoad()">
@@ -137,6 +136,7 @@ The entire thing looks like:
              <div id="content">
                  I like to write about technology. Because I want to get on the front page of hacker news.
              </div>
+     
              <hr>
              <div id="comments"></div>
              <hr>
